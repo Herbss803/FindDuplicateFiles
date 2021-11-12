@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FindDuplicateFiles": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:/Master Backup/Sony Nex F3\""
+    }
+  }
+}
