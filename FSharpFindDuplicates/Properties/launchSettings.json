@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "FindDuplicateFiles": {
+    "FSharpFindDuplicates": {
       "commandName": "Project",
       "commandLineArgs": "\"D:\\Master Backup\""
     }
