@@ -2,7 +2,7 @@
   "profiles": {
     "FSharpFindDuplicates": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\Master Backup\""
+      "commandLineArgs": "\"D:\\Media Backup\""
     }
   }
 }
