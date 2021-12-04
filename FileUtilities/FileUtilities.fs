@@ -17,3 +17,12 @@ module Finder =
                     let subfolderResults = getFilesWithExtension ext d
                     Array.append subfolderResults acc
                     ) filesMatchingExtension dirs
+
+module FileTools =
+    let getTargetPath filePath targetParentDir = 
+        Path.Combine(targetParentDir, filePath)
+
+    //// move files to target parent directory
+    //let moveFiles files targetParentDirectory = 
+    //    files |> Array.iter copyFile targetParentDirectory
+        
