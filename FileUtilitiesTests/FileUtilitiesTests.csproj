@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="FileUtilities">
-      <HintPath>..\FileUtilities\bin\Debug\net5.0\FileUtilities.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\FileUtilities\FileUtilities.fsproj" />
   </ItemGroup>
 
 </Project>

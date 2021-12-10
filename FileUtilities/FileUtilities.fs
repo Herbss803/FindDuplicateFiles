@@ -19,10 +19,6 @@ module Finder =
                     ) filesMatchingExtension dirs
 
 module FileTools =
-    let getTargetPath filePath targetParentDir = 
-        Path.Combine(targetParentDir, filePath)
-
-    //// move files to target parent directory
-    //let moveFiles files targetParentDirectory = 
-    //    files |> Array.iter copyFile targetParentDirectory
-        
+    let getTargetFilePath (filePath:string) targetParentDir = 
+        let dirName = Path.GetDirectoryName(filePath)
+        Path.Combine(dirName, targetParentDir)
