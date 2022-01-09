@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using FluentAssertions;
+using Xunit;
 
 namespace FileUtilitiesTests;
 
@@ -9,5 +10,7 @@ public class FileUtilititesTests
     [InlineData("d:\\root", "d:\\before\\subdir\\final.txt", "d:\\root\\subdir\\final.txt")]
     public void should_build_new_destination(string targetDir, string filePath, string expectedFilePath)
     {
+        var expectedPath = FileUtility2.FileUtility2.GetTargetPath(filePath, targetDir);
+        expectedPath.Should().Be(expectedFilePath);
     }
 }

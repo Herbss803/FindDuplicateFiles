@@ -21,4 +21,5 @@ module Finder =
 module FileTools =
     let getTargetFilePath (filePath:string) targetParentDir = 
         let dirName = Path.GetDirectoryName(filePath)
-        Path.Combine(dirName, targetParentDir)
+        let fileName = Path.GetFileName(filePath);
+        Path.Combine(Path.Combine(targetParentDir, dirName), fileName);
