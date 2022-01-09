@@ -3,7 +3,7 @@ using System.Text;
 
 namespace FileUtility2
 {
-    public class FileUtility2
+    public class PathHelpers
     {
         public static string GetTargetPath(string filePath, string targetParentDir)
         {
@@ -28,17 +28,6 @@ namespace FileUtility2
             var recursiveResult = GetPathExcludingTopLevelDirectory(dirInfo.Parent.FullName);
             var pathSeparator = !string.IsNullOrEmpty(recursiveResult) ? "\\" : "";
             return recursiveResult + pathSeparator + dirInfo.Name;
-        }
-
-        private static string BuildPathFromReverseList(List<string> dirHierarchyReversed)
-        {
-            var pathAccumulated = "";
-            for (var i = dirHierarchyReversed.Count - 1; i >= 0; i--)
-            {
-                pathAccumulated = Path.Combine(pathAccumulated, dirHierarchyReversed[i]);
-            }
-
-            return pathAccumulated;
         }
     }
 }
