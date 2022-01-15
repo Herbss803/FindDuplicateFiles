@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FSharpFindDuplicates": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\Media Backup\""
+    }
+  }
+}

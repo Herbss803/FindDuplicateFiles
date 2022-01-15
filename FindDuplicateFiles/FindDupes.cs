@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using FileUtility2;
 
 namespace FindDuplicateFiles;
 
@@ -10,12 +11,13 @@ public class FindDupes
         Console.WriteLine($"Scanning path {path}");
         var dictionary = new Dictionary<string, List<FileHashEntry>>();
 
-        FindDupes.RecursiveBuildHash(path, dictionary);
-        var filesToDelete = FindDupes.SelectFilesToDelete(dictionary);
+        RecursiveBuildHash(path, dictionary);
+        var filesToDelete = SelectFilesToDelete(dictionary);
         foreach (var f in filesToDelete)
         {
             Console.WriteLine($"Delete: {f}");
         }
+
         File.WriteAllLines("filesToDelete.txt", filesToDelete);
     }
 
@@ -27,9 +29,10 @@ public class FindDupes
         foreach (var f in filesToDelete)
         {
             Console.WriteLine($"Delete {f}");
-            long length = new System.IO.FileInfo(f).Length;
+            var length = new FileInfo(f).Length;
             totalLength += length;
         }
+
         Console.WriteLine($"Deleting files could save {totalLength}");
 
         foreach (var f in filesToDelete)
@@ -38,13 +41,12 @@ public class FindDupes
         }
     }
 
-    public static void RecursiveBuildHash(string path, Dictionary<string, List<FileHashEntry>> dictionary)
+    private static void RecursiveBuildHash(string path, Dictionary<string, List<FileHashEntry>> dictionary)
     {
         var results = Directory.GetFileSystemEntries(path);
         foreach (var r in results)
         {
-            var attr = File.GetAttributes(r);
-            if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+            if (r.PathIsDirectory())
             {
                 // recurse
                 Console.WriteLine($"Recursing down folder {r}");
@@ -59,18 +61,19 @@ public class FindDupes
         }
     }
 
-    public static List<string> SelectFilesToDelete(Dictionary<string, List<FileHashEntry>> dictionary)
+    private static List<string> SelectFilesToDelete(Dictionary<string, List<FileHashEntry>> dictionary)
     {
         var filesToDelete = new List<string>();
         foreach (var entry in dictionary)
         {
             var fileHashEntries = entry.Value;
-            if (fileHashEntries.Count > 1)  // at least 2
+            if (fileHashEntries.Count > 1) // at least 2
             {
                 var sortedByNameLength = fileHashEntries.OrderBy(e => e.FileName.Length).ToArray();
                 filesToDelete.AddRange(sortedByNameLength.TakeLast(fileHashEntries.Count - 1).Select(e => e.FileName));
             }
         }
+
         return filesToDelete;
     }
 

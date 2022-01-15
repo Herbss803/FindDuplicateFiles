@@ -11,8 +11,13 @@ try
         throw new Exception("Please pass path as first arg");
     }
 
+    // Use case 1
     // FindDupes.FindDupesAndWriteToFile(path);
-    FindDupes.DeleteFilesFromFileList("filesToDelete.txt");
+    //FindDupes.DeleteFilesFromFileList("filesToDelete.txt");
+
+    // Use case 2
+    var foundFiles = FileTypeSeparator.FindAllFilesByExtension(path, new List<string>(){".m2ts"});
+    FileTypeSeparator.MoveFilesToPath("d:\\videos_copied2", foundFiles);
 
     var readLine = Console.ReadLine();
 }

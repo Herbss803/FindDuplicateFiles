@@ -2,7 +2,7 @@
   "profiles": {
     "FindDuplicateFiles": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:/Master Backup/Sony Nex F3\""
+      "commandLineArgs": "\"d:\\videos_copied\""
     }
   }
 }
