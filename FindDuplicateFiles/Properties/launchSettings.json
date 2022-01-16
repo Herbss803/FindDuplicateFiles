@@ -2,7 +2,7 @@
   "profiles": {
     "FindDuplicateFiles": {
       "commandName": "Project",
-      "commandLineArgs": "\"d:\\videos_copied\""
+      "commandLineArgs": "\"D:\\Master Backup\""
     }
   }
 }

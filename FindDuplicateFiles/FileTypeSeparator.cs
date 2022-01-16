@@ -1,9 +1,43 @@
-﻿using FileUtility2;
+﻿using System.Diagnostics;
+using FileUtility2;
 
 namespace FindDuplicateFiles;
 
 public class FileTypeSeparator
 {
+    public static List<string> FindAllFileTypes(string path)
+    {
+        var acc = new Dictionary<string, string>();
+        RecursiveFindFileTypes(path, acc);
+
+        var fileTypes = acc.Keys.ToList();
+        File.WriteAllLines("fileTypes.txt", fileTypes);
+        return fileTypes;
+    }
+
+    private static void RecursiveFindFileTypes(string path, Dictionary<string,string> acc)
+    {
+        var folderFiles = Directory.GetFileSystemEntries(path);
+        foreach (var r in folderFiles)
+        {
+            if (r.PathIsDirectory())
+            {
+                Console.WriteLine($"Checking directory {r}");
+                RecursiveFindFileTypes(r, acc);
+            }
+            else
+            {
+                var fileExtension = Path.GetExtension(r);
+
+                if (!acc.ContainsKey(fileExtension))
+                {
+                    Console.WriteLine($"Adding extension {fileExtension}");
+                    acc.Add(fileExtension, fileExtension);
+                }
+            }
+        }
+    }
+
     public static List<string> FindAllFilesByExtension(string path, ICollection<string> extensionFilter)
     {
         var acc = new List<string>();

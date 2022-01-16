@@ -12,12 +12,15 @@ try
     }
 
     // Use case 1
-    // FindDupes.FindDupesAndWriteToFile(path);
-    //FindDupes.DeleteFilesFromFileList("filesToDelete.txt");
+    FindDupes.FindDupesAndWriteToFile(path);
+    FindDupes.DeleteFilesFromFileList("filesToDelete.txt");
 
     // Use case 2
-    var foundFiles = FileTypeSeparator.FindAllFilesByExtension(path, new List<string>(){".m2ts"});
-    FileTypeSeparator.MoveFilesToPath("d:\\videos_copied2", foundFiles);
+    //var foundFiles = FileTypeSeparator.FindAllFilesByExtension(path, new List<string>() { ".m2ts", ".mp4", ".MTS", ".modd", ".mov", ".MOV", ".moff", ".m4v", ".wmv" });
+    //FileTypeSeparator.MoveFilesToPath("d:\\MasterBackupVideos", foundFiles);
+
+    // Use case 3
+    // FileTypeSeparator.FindAllFileTypes(path);
 
     var readLine = Console.ReadLine();
 }

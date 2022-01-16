@@ -18,7 +18,27 @@ public class FindDupes
             Console.WriteLine($"Delete: {f}");
         }
 
+        WriteDebugFile("debugFilesToDelete.txt", dictionary);
         File.WriteAllLines("filesToDelete.txt", filesToDelete);
+    }
+
+    private static void WriteDebugFile(string debugFilePath, Dictionary<string, List<FileHashEntry>> dictionary)
+    {
+        var filesWithConflictLines = new List<string>();
+        foreach (var entry in dictionary)
+        {
+            var fileHashEntries = entry.Value;
+            if (fileHashEntries.Count > 1) // at least 2
+            {
+                // insert spacer
+                filesWithConflictLines.Add("==================================================");
+                foreach (var file in fileHashEntries)
+                {
+                    filesWithConflictLines.Add(file.FileName);
+                }
+            }
+        }
+        File.WriteAllLines(debugFilePath, filesWithConflictLines);
     }
 
     public static void DeleteFilesFromFileList(string fileListPath)
